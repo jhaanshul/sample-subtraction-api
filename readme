@@ -1,0 +1,15 @@
+Run the project without docker: npm start,
+Run test cases: npm test
+
+Docker commands: 
+build: docker build -t subtraction-api .
+run(interactive shell): docker run -it -p 3000:3000 subtraction-api
+run(daemon):  docker run -d -p 3000:3000 subtraction-api
+
+hit the api:
+localhost:3000/subtraction/listquestions?numberOfQuestions=3&minuedDigits=4&subtrahendDigits=3&isBorrow=0
+
+Load docker image from tar ball:
+docker load < subtraction-api-container.tar
+check the image: docker images
+build it: docker build -t subtraction-api .

@@ -1,0 +1,21 @@
+{
+  "name": "subtraction-api",
+  "version": "1.0.0",
+  "description": "a subtraction api microservice",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "mocha src/test"
+  },
+  "author": "Anshul",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-redirect": "^1.2.2",
+    "http": "0.0.1-security"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3"
+  }
+}
