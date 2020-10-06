@@ -89,7 +89,11 @@ const generateQuestions = (args) => {
                 let randno = helper.getRandomInt(1,10) * Math.pow(10, helper.getRandomInt(0,digits));
                 let modifiedAns = correctAns + randno;
                 while(options.includes(modifiedAns)){
-                    randno = Math.pow(10, helper.getRandomInt(0,digits));
+                    if(digits===1){
+                        randno = helper.getRandomInt(0,7);
+                    } else {
+                        randno = Math.pow(10, helper.getRandomInt(0,digits));
+                    }
                     modifiedAns = correctAns + randno;
                 }
                 options.push(modifiedAns);
