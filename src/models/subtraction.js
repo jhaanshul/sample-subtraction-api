@@ -60,24 +60,39 @@ const generateQuestions = (args) => {
                 statusCode: 400
             }))
         }
+        if (subtrahendDigits === minuedDigits && subtrahendDigits === 1 && isBorrow === 1) {
+            throw new Error(JSON.stringify({
+                message: "Borrowing not possible for single digit numbers when answer should be no negative",
+                statusCode: 400
+            }))
+        }
+        if(subtrahendDigits <= 0 || minuedDigits <=0 ){
+            throw new Error(JSON.stringify({
+                message: "negative numbers not allowed",
+                statusCode: 400
+            }))
+        }
         const finalRes = [];
         for(let index = 0; index < numberOfQuestions; index +=1 ) {
-            let {min, max} = randNumberPair(subtrahendDigits);
+            let {max} = randNumberPair(minuedDigits);
+            let {min} = randNumberPair(subtrahendDigits)
             while(isBorrow && !isBorrowingPossible(max, min)){
-                const res = randNumberPair(subtrahendDigits);
-                min = res.min;
+                let res = randNumberPair(minuedDigits);
                 max = res.max;
+                res = randNumberPair(subtrahendDigits);
+                min = res.min;
             };
             while(!isBorrow && isBorrowingPossible(max, min)) {
-                const res = randNumberPair(subtrahendDigits);
-                min = res.min;
+                let res = randNumberPair(minuedDigits);
                 max = res.max;
+                res = randNumberPair(subtrahendDigits);
+                min = res.min;
             }
-            if(minuedDigits > subtrahendDigits){
-                const digitDifference = minuedDigits - subtrahendDigits;
-                let res = randNumberPair(digitDifference);
-                max = res.max * Math.pow(10, subtrahendDigits) + max;
-            }
+            // if(minuedDigits > subtrahendDigits){
+            //     const digitDifference = minuedDigits - subtrahendDigits;
+            //     let res = randNumberPair(digitDifference);
+            //     max = res.max * Math.pow(10, subtrahendDigits) + max;
+            // }
             let options = [];
             // push the right answer
             options.push(max - min);
